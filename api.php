@@ -9,7 +9,7 @@ use Battis\ConfigXML;
  */
 
 /* open a connection the MySQL database server */
-$config = new ConfigXML('./config.xml');
+$config = new ConfigXML(__DIR__ . '/config.xml');
 $sql = $config->newInstanceOf(mysqli::class, '//mysql');
 
 /* allow particular hosts to access this API (e.g. * -- a dangerous setting that allows _everyone_ to access this!) */
