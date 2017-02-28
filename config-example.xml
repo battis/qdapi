@@ -1,0 +1,11 @@
+<config>
+    <mysql>
+        <host>localhost</host>
+        <user>timmy</user>
+        <password>s00pers3kr37</password>
+        <database>mydb</database>
+    </mysql>
+    <cors>
+        <origin>*</origin>
+    </cors>
+</config>

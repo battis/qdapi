@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "464fc179df17236ee68a15b9c2e0316f",
+    "content-hash": "e58276d5efc5d98e6843743619f30650",
+    "packages": [
+        {
+            "name": "battis/configxml",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/battis/configxml.git",
+                "reference": "b68daa917e052bd8f53c3be0378b23d33526f961"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/battis/configxml/zipball/b68daa917e052bd8f53c3be0378b23d33526f961",
+                "reference": "b68daa917e052bd8f53c3be0378b23d33526f961",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Battis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Seth Battis",
+                    "email": "seth@battis.net"
+                }
+            ],
+            "description": "Load a configuration XML file for quick use",
+            "time": "2016-05-09 19:47:21"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
