@@ -1,0 +1,13 @@
+{
+    "name": "battis/qdapi-php-example",
+    "description": "A PHP example of accessing a QDAPI instance",
+    "require": {
+        "educoder/pest": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Seth Battis",
+            "email": "seth@battis.net"
+        }
+    ]
+}
