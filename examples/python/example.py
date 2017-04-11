@@ -41,7 +41,7 @@ print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n
 # id: 4; bar: dummy info; baz: smart info!
 
 # DELETE deletes an existing record
-count = json.loads(request.delete(url + '/foo/3').text)
+count = json.loads(request.delete(url + '/foo/' + foo['id']).text)
 print('deleted ' + count + 'records\n')
 # output:
 #
