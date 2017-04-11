@@ -13,7 +13,7 @@ This is a small script that allows you to hook a RESTful API up to a MySQL datab
 
 ### Usage
 
-The API supports the main four RESTful verbs:
+The API supports the main four RESTful verbs: GET, POST, PUT, DELETE. There are language-specific examples of apps that interact with the API in the [/examples](examples) directory.
 
 ##### GET
 
