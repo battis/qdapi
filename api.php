@@ -51,6 +51,10 @@ switch ($verb) {
     case 'DELETE':
         $query = "DELETE FROM `$table` WHERE `id` = '$key'";
         break;
+    case 'OPTIONS':
+        header('Access-Control-Allow-Methods: ' . $config->toString('//cors/methods'));
+        header('Access-Control-Allow-Headers: ' . $config->toString('//cors/headers'));
+        exit;
 }
 
 /* attempt the request */

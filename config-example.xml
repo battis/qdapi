@@ -7,5 +7,7 @@
     </mysql>
     <cors>
         <origin>*</origin>
+        <headers>accept</headers>
+        <methods>GET, POST, PUT, DELETE, OPTIONS</methods>
     </cors>
 </config>
