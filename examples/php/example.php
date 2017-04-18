@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$api = new Pest('http://example.com/api/v1');
+$api = new PestJSON('https://example.com/api/v1');
 
 /* GET all of the data in the foo table */
 $foos = $api->get('/foo');

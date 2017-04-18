@@ -12,14 +12,14 @@ import Alamofire
 class ViewController: UIViewController {
 
     @IBOutlet weak var OutputText: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let fooEndpoint: String = "https://roswell.stmarksschool.org/~sethbattis/api/v1/foo"
+
+        let url: String = "https://example.com/api/v1"
 
         /* GET all of the data in the foo table */
-        Alamofire.request(fooEndpoint, method: .get).responseJSON { response in
+        Alamofire.request(url + "/foo", method: .get).responseJSON { response in
             guard let json = response.result.value as? [[String: Any]] else {
                 print("Didn't get foos as JSON array from API")
                 print("Error: \(response.result.error)")
@@ -37,9 +37,9 @@ class ViewController: UIViewController {
              * id: 3; bar: red; baz: raspberry
              */
         }
-        
+
         /* GET a single record */
-        Alamofire.request(fooEndpoint + "/2", method: .get).responseJSON { response in
+        Alamofire.request(url + "/foo/2", method: .get).responseJSON { response in
             guard let json = response.result.value as? [String: Any] else {
                 print("Didn't get foo as JSON object from API")
                 print("Error: \(response.result.error)")
@@ -52,10 +52,10 @@ class ViewController: UIViewController {
          *
          * id: 2; bar: the quick brown fox; baz: asparagus
          */
-        
+
         /* POST a new record */
         let newFoo: [String: Any] = ["bar": "dummy info", "baz": "more dummy info"]
-        Alamofire.request(fooEndpoint, method: .post, parameters: newFoo, encoding: JSONEncoding.default).responseJSON { response in
+        Alamofire.request(url + "/foo", method: .post, parameters: newFoo, encoding: JSONEncoding.default).responseJSON { response in
             guard let json = response.result.value as? [String: Any] else {
                 print("Didn't get foo as JSON object from API")
                 print("Error: \(response.result.error)")
@@ -67,10 +67,10 @@ class ViewController: UIViewController {
              *
              * id: 4; bar: dummy info; baz: more dummy info
              */
-            
+
             /* PUT updates to an existing record (the one we just inserted!) */
             let updateFoo: [String: Any] = ["baz": "smart info!"]
-            Alamofire.request(fooEndpoint + "/\(json["id"]!)", method: .put, parameters: updateFoo, encoding: JSONEncoding.default).responseJSON { response in
+            Alamofire.request(url + "/foo/\(json["id"]!)", method: .put, parameters: updateFoo, encoding: JSONEncoding.default).responseJSON { response in
                 guard let json = response.result.value as? [String: Any] else {
                     print("Didn't get foo as JSON object from API")
                     print("Error: \(response.result.error)")
@@ -82,9 +82,9 @@ class ViewController: UIViewController {
                  *
                  * id: 4; bar: dummy info; baz: smart info!
                  */
-                
+
                 /* DELETE deletes an existing record */
-                Alamofire.request(fooEndpoint + "/\(json["id"]!)", method: .delete).responseJSON { response in
+                Alamofire.request(url + "/foo/\(json["id"]!)", method: .delete).responseJSON { response in
                     guard let json = response.result.value else {
                         print("DELETE Didn't get count as JSON object from API")
                         print("Error: \(response.result.error)")
@@ -108,4 +108,3 @@ class ViewController: UIViewController {
 
 
 }
-

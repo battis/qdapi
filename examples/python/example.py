@@ -2,7 +2,7 @@ import requests
 import json
 
 # base URL of API endpoints
-url = 'http://example.com/api/v1'
+url = 'https://example.com/api/v1'
 
 # GET all of the data in the foo table
 foos = json.loads(requests.get(url + '/foo').text)
