@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B1201841EA66D4100B9274B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5B1201831EA66D4100B9274B /* README.md */; };
 		5BB996EC1E9F037700C31AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB996EB1E9F037700C31AB9 /* AppDelegate.swift */; };
 		5BB996EE1E9F037700C31AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB996ED1E9F037700C31AB9 /* ViewController.swift */; };
 		5BB996F11E9F037700C31AB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB996EF1E9F037700C31AB9 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B1201831EA66D4100B9274B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5BB996E81E9F037700C31AB9 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB996EB1E9F037700C31AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BB996ED1E9F037700C31AB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		5BB996DF1E9F037700C31AB9 = {
 			isa = PBXGroup;
 			children = (
+				5B1201831EA66D4100B9274B /* README.md */,
 				5BB996EA1E9F037700C31AB9 /* Example */,
 				5BB996E91E9F037700C31AB9 /* Products */,
 				1341D272E5FD7A67D9932359 /* Pods */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B1201841EA66D4100B9274B /* README.md in Sources */,
 				5BB996EE1E9F037700C31AB9 /* ViewController.swift in Sources */,
 				5BB996EC1E9F037700C31AB9 /* AppDelegate.swift in Sources */,
 			);
@@ -379,6 +383,7 @@
 				5BB996FC1E9F037700C31AB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
