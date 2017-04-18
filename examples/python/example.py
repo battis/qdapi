@@ -15,16 +15,16 @@ for foo in foos:
 # id: 3; bar: red; baz: raspberry
 
 # GET a single record
-foo = json.loads(request.get(url + '/foo/2').text)
+foo = json.loads(requests.get(url + '/foo/2').text)
 print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n')
 # output:
 #
 # id: 2; bar: the quick brown fox; baz: asparagus
 
 # POST a new record
-foo = json.loads(request.post(url + '/foo', params = {
-    'bar' => 'dummy info',
-    'baz' => 'more dummy info'
+foo = json.loads(requests.post(url + '/foo', params = {
+    'bar': 'dummy info',
+    'baz': 'more dummy info'
 }).text)
 print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n')
 # output:
@@ -32,8 +32,8 @@ print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n
 # id: 4; bar: dummy info; baz: more dummy info
 
 # PUT updates to an existing record (the one we just inserted!)
-foo = json.loads(request.put(url + '/foo/' + foo['id'], params = {
-    'baz' => 'smart info!'
+foo = json.loads(requests.put(url + '/foo/' + foo['id'], params = {
+    'baz': 'smart info!'
 }).text)
 print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n')
 # output:
@@ -41,8 +41,8 @@ print('id: ' + foo['id'] + '; bar: ' + foo['bar'] + '; baz: ' + foo['baz'] + '\n
 # id: 4; bar: dummy info; baz: smart info!
 
 # DELETE deletes an existing record
-count = json.loads(request.delete(url + '/foo/' + foo['id']).text)
-print('deleted ' + count + 'records\n')
+count = json.loads(requests.delete(url + '/foo/' + foo['id']).text)
+print('deleted ' + str(count) + ' records\n')
 # output:
 #
 # deleted 1 records

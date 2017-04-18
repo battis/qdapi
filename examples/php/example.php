@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $api = new Pest('http://example.com/api/v1');
 
 /* GET all of the data in the foo table */
-$foos = json_decode($api->get('/foo'), true);
+$foos = $api->get('/foo');
 foreach ($foos as $foo) {
     echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
 }
@@ -18,7 +18,7 @@ foreach ($foos as $foo) {
  */
 
 /* GET a single record */
-$foo = json_decode($api->get('/foo/2'), true);
+$foo = $api->get('/foo/2');
 echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
 /*
  * output:
@@ -27,10 +27,10 @@ echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
  */
 
 /* POST a new record */
-$foo = json_decode($api->post('/foo', [
+$foo = $api->post('/foo', [
     'bar' => 'dummy info',
     'baz' => 'more dummy info'
-]), true);
+]);
 echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
 /*
  * output:
@@ -39,9 +39,9 @@ echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
  */
 
 /* PUT updates to an existing record (the one we just inserted!) */
-$foo = json_decode($api->put("/foo/{$foo['id']}", [
+$foo = $api->put("/foo/{$foo['id']}", [
     'baz' => 'smart info!'
-]), true);
+]);
 echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
 /*
  * output:
@@ -50,7 +50,7 @@ echo "id: {$foo['id']}; bar: {$foo['bar']}; baz: {$foo['baz']}" . PHP_EOL;
  */
 
 /* DELETE deletes an existing record */
-$count = json_decode($api->delete("/foo/{$foo['id']}"), true);
+$count = $api->delete("/foo/{$foo['id']}");
 echo "deleted $count records " . PHP_EOL;
 /*
  * output:
