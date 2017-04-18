@@ -14,4 +14,4 @@ $ php example.php
 
 ### Caveat
 
-You will need to edit [example.php](https://github.com/battis/qdapi/blob/master/examples/php/example.php#L5) to point the `$api` at an existing QDAPI installation!
+You will need to edit [example.php](./example.php#L5) to point the `$api` at an existing QDAPI installation!

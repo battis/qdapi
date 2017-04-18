@@ -17,4 +17,4 @@ $ pip install -r requirements.txt
 
 ### Caveat
 
-You will need to edit [example.py](https://github.com/battis/qdapi/blob/master/examples/python/example.py#L5) to point the `url` at an existing QDAPI installation!
+You will need to edit [example.py](./example.py#L5) to point the `url` at an existing QDAPI installation!

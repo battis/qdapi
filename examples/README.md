@@ -5,3 +5,5 @@ All of the examples are written assuming that the API is served from `https://ex
 | 1 | hello world | purple people eaters |
 | 2 | the quick brown fox | asparagus |
 | 3 | red | raspberry |
+
+[foo.sql](./foo.sql) is a MySQL script to create exactly this table.

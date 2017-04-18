@@ -10,4 +10,4 @@ This will read the dependencies from `Podfile` and create an Xcode workspace tha
 
 ### Caveat
 
-You will need to edit [ViewController.swift](https://github.com/battis/qdapi/blob/master/examples/swift/Example/Example/ViewController.swift#L19) to point the `url` at an existing QDAPI installation!
+You will need to edit [ViewController.swift](./Example/Example/ViewController.swift#L19) to point the `url` at an existing QDAPI installation!

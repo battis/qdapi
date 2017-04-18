@@ -16,4 +16,4 @@ $ npm start
 
 ### Caveat
 
-You will need to edit [App.js](https://github.com/battis/qdapi/blob/master/examples/reactjs/src/components/App.js#L36) to point the `url` at an existing QDAPI installation!
+You will need to edit [App.js](./src/components/App.js#L36) to point the `url` at an existing QDAPI installation!
