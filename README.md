@@ -154,12 +154,8 @@ DELETE http://example.com/api/v1/foo/2
 | 1 | hello world | purple people eaters |
 | 3 | red | raspberry |
 
-...and would returned the deleted record:
+...and would returned the the number of deleted records (probably only 1, might be 0):
 
 ```json
-{
-  "id": "2",
-  "bar": "the quick brown fox",
-  "baz": "asparagus"
-}
+1
 ```
