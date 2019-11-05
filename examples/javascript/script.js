@@ -1,63 +1,84 @@
-const url = "https://cdf.gannacademy.org/web/api/v1/animals";
+/* base URL for RESTful API requests */
+const url = "http://example.com/api/v1/foo";
 
-function format(foo) {
+/**
+ * Formats a "foo" record into a paragraph element
+ * @param foo
+ * @returns {HTMLParagraphElement}
+ */
+function formatRecord(foo) {
     let p = document.createElement("p");
-    p.innerText =  'id' + foo.id + "; name: " + foo.name + "; species: " + foo.species;
+    p.innerText = 'id' + foo.id + "; bar: " + foo.bar + "; baz: " + foo.baz;
     return p;
 }
 
-function request(method, endpoint, params, callback) {
-    var http = new XMLHttpRequest();
-    http.open(method, endpoint, true);
-    http.onload = function() {
-        let data = JSON.parse(this.response);
-        console.log(request, data);
-        if (http.status >= 200 && http.status < 400) {
-            callback(data);
-        } else {
-            console.log("ERROR " + http.status + ": " + http.statusText);
-        }
-    };
-    if (params !== undefined) {
-        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        http.send(params)
-    } else {
-        http.send();
-    }
+/**
+ * Replace the content of an element
+ * @param id
+ * @param content
+ */
+function replaceElementContent(id, content) {
+    let node = document.getElementById(id);
+    node.innerHTML = "";
+    node.append(content);
 }
 
-request("GET", url, undefined, function(data) {
+/**
+ * Send an asynchronous AJAX request to a RESTful API
+ * @param method GET, POST, PUT, DELETE
+ * @param url
+ * @param callback
+ */
+function sendAjaxRequest(method, url, callback) {
+    let http = new XMLHttpRequest();
+    if (typeof url === "string") {
+        url = new URL(url);
+    }
+    http.open(method, url, true);
+    http.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            callback(JSON.parse(this.response));
+        }
+    };
+    http.send();
+}
+
+/* get all of the "foo" record */
+sendAjaxRequest("GET", url, function (data) {
     const div = document.getElementById("get-all");
     div.innerHTML = "";
-    data.forEach(function(foo) {
-        div.append(format(foo));
+    data.forEach(function (foo) {
+        div.append(formatRecord(foo));
     })
 });
 
-request("GET", url + "/2", undefined, function(foo) {
-    const div = document.getElementById("get-one");
-    div.innerHTML = "";
-    div.append(format(foo));
+/* get a single "foo" record by ID */
+sendAjaxRequest("GET", url + "/2", function (foo) {
+    replaceElementContent("get-one", formatRecord(foo));
 });
 
-var id = null;
-request("POST", url, "bar=dummy%20info&baz=more%20dummy%20info", function (foo) {
-    const div = document.getElementById("post");
-    div.innerHTML = "";
-    div.append(format(foo));
-    id = foo.id;
+/* post a new "foo" record to the database */
+let postUrl = new URL(url);
+postUrl.searchParams.set("bar", "dummy info");
+postUrl.searchParams.set("baz", "more dummy info");
+sendAjaxRequest("POST", postUrl, function (foo) {
+    replaceElementContent("post", formatRecord(foo));
+
+    /* put changes to an existing "foo" record to the database */
+    // don't process PUT until POST completes
+    let putUrl = new URL(url + "/" + foo.id);
+    putUrl.searchParams.set("baz", "smart info!");
+    sendAjaxRequest("PUT", putUrl, function (foo) {
+        replaceElementContent("put", formatRecord(foo));
+
+        /* delete an existing "foo" record */
+        // don't process DELETE until PUT completes
+        sendAjaxRequest("DELETE", url + "/" + foo.id, function (count) {
+            let message = document.createElement("p");
+            message.innerText = "deleted " + count + " records";
+            replaceElementContent("delete", message);
+        });
+    });
 });
 
-request("PUT", url + "/" + id, "baz=smart%20info!", function(foo) {
-    const div = document.getElementById("ppst");
-    div.innerHTML = "";
-    div.append(format(foo));
-});
 
-request("DELETE", url + "/" + id, undefined, function(count) {
-    const div = document.getElementById("delete");
-    div.innerHTML = "";
-    let p = document.createElement("p");
-    p.innerText = "deleted " + count + " records";
-    div.append(p);
-});
