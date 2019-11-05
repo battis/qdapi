@@ -1,5 +1,21 @@
 /* base URL for RESTful API requests */
-const url = "http://example.com/api/v1/foo";
+const apiUrl = "http://example.com/api/v1/";
+
+/**
+ * Build a URL object with optional search parameters
+ * @param endpoint relative to base apiUrl
+ * @param params optional object of properties to pass as search parameters
+ * @returns {URL}
+ */
+function buildURL(endpoint, params = {}) {
+    let url = new URL(apiUrl + endpoint);
+    for (let property in params) {
+        if(params.hasOwnProperty(property)) {
+            url.searchParams.set(property, params[property]);
+        }
+    }
+    return url;
+}
 
 /**
  * Formats a "foo" record into a paragraph element
@@ -31,9 +47,6 @@ function replaceElementContent(id, content) {
  */
 function sendAjaxRequest(method, url, callback) {
     let http = new XMLHttpRequest();
-    if (typeof url === "string") {
-        url = new URL(url);
-    }
     http.open(method, url, true);
     http.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -44,7 +57,7 @@ function sendAjaxRequest(method, url, callback) {
 }
 
 /* get all of the "foo" record */
-sendAjaxRequest("GET", url, function (data) {
+sendAjaxRequest("GET", new URL(apiUrl + "/foo"), function (data) {
     const div = document.getElementById("get-all");
     div.innerHTML = "";
     data.forEach(function (foo) {
@@ -53,27 +66,33 @@ sendAjaxRequest("GET", url, function (data) {
 });
 
 /* get a single "foo" record by ID */
-sendAjaxRequest("GET", url + "/2", function (foo) {
+sendAjaxRequest("GET", new URL(apiUrl + "/foo/2"), function (foo) {
     replaceElementContent("get-one", formatRecord(foo));
 });
 
 /* post a new "foo" record to the database */
-let postUrl = new URL(url);
-postUrl.searchParams.set("bar", "dummy info");
-postUrl.searchParams.set("baz", "more dummy info");
+let postUrl = buildURL(
+    apiUrl + "/foo",
+    {
+        bar: "dummy info",
+        baz: "more dummy info"
+    });
 sendAjaxRequest("POST", postUrl, function (foo) {
     replaceElementContent("post", formatRecord(foo));
 
     /* put changes to an existing "foo" record to the database */
     // don't process PUT until POST completes
-    let putUrl = new URL(url + "/" + foo.id);
-    putUrl.searchParams.set("baz", "smart info!");
+    let putUrl = buildURL(
+        apiUrl + "/foo/" + foo.id,
+        {
+            baz: "smart info!"
+        });
     sendAjaxRequest("PUT", putUrl, function (foo) {
         replaceElementContent("put", formatRecord(foo));
 
         /* delete an existing "foo" record */
         // don't process DELETE until PUT completes
-        sendAjaxRequest("DELETE", url + "/" + foo.id, function (count) {
+        sendAjaxRequest("DELETE", new URL(apiUrl + "/foo/" + foo.id), function (count) {
             let message = document.createElement("p");
             message.innerText = "deleted " + count + " records";
             replaceElementContent("delete", message);
