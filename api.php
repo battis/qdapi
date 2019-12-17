@@ -37,6 +37,10 @@ foreach ($parameters as $field => $value) {
 }
 $set = implode(', ', $set);
 
+foreach (glob(__DIR__ . '/plugins/*.php') as $plugin) {
+    include_once $plugin;
+}
+
 /* build the SQL query from the request */
 switch ($verb) {
     case 'GET':

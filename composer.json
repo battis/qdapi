@@ -1,13 +1,14 @@
 {
-    "name": "battis/qdapi",
-    "description": "A quick and dirty RESTful API server for a MySQL database",
-    "require": {
-        "battis/configxml": "^1.0"
-    },
-    "authors": [
-        {
-            "name": "Seth Battis",
-            "email": "seth@battis.net"
-        }
-    ]
+  "name": "battis/qdapi",
+  "description": "A quick and dirty RESTful API server for a MySQL database",
+  "require": {
+    "battis/configxml": "^1.0",
+    "ext-mysqli": "*"
+  },
+  "authors": [
+    {
+      "name": "Seth Battis",
+      "email": "seth@battis.net"
+    }
+  ]
 }
