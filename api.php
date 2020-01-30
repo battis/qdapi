@@ -22,12 +22,12 @@ $input = file_get_contents('php://input');
 $parameters = json_decode($input, true);
 if (empty($parameters)) {
     parse_str($input, $parameters);
-}
-if (empty($parameters)) {
-    parse_str($_SERVER['QUERY_STRING'], $parameters);
-}
-if (empty($parameters)) {
-    $parameters = simplexml_load_string($input);
+    if (empty($parameters)) {
+        parse_str($_SERVER['QUERY_STRING'], $parameters);
+        if (empty($parameters)) {
+            $parameters = simplexml_load_string($input);
+        }
+    }
 }
 
 /* set the table and key (if present) from first two tokens of end point */
