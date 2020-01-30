@@ -3,7 +3,9 @@
   "description": "A quick and dirty RESTful API server for a MySQL database",
   "require": {
     "battis/configxml": "^1.0",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*"
   },
   "authors": [
     {

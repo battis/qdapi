@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection SqlResolve */
 
 require 'vendor/autoload.php';
 
@@ -18,9 +18,16 @@ header('Access-Control-Allow-Origin: ' . $config->toString('//cors/origin'));
 /* parse the query out of the request string */
 $verb = strtoupper($_SERVER['REQUEST_METHOD']);
 $endpoint = explode('/', trim($_SERVER['PATH_INFO'], '/'));
-$parameters = json_decode(file_get_contents('php://input'), true);
+$input = file_get_contents('php://input');
+$parameters = json_decode($input, true);
+if (empty($parameters)) {
+    parse_str($input, $parameters);
+}
 if (empty($parameters)) {
     parse_str($_SERVER['QUERY_STRING'], $parameters);
+}
+if (empty($parameters)) {
+    $parameters = simplexml_load_string($input);
 }
 
 /* set the table and key (if present) from first two tokens of end point */
@@ -38,7 +45,8 @@ foreach ($parameters as $field => $value) {
 $set = implode(', ', $set);
 
 foreach (glob(__DIR__ . '/plugins/*.php') as $plugin) {
-    include_once $plugin;
+    /** @noinspection PhpIncludeInspection */
+    include $plugin;
 }
 
 /* build the SQL query from the request */
@@ -50,7 +58,7 @@ switch ($verb) {
         $query = "UPDATE `$table` SET $set WHERE `id` = '$key'";
         break;
     case 'POST':
-        $query = "INSERT INTO `$table` SET $set";
+        $query = "INSERT INTO `$table` SET {$set}";
         break;
     case 'DELETE':
         $query = "DELETE FROM `$table` WHERE `id` = '$key'";
@@ -62,6 +70,7 @@ switch ($verb) {
 }
 
 /* attempt the request */
+/** @var mysqli_result $result */
 $result = $sql->query($query);
 
 /* if the query fails, must have been invalid request */
@@ -83,6 +92,7 @@ switch ($verb) {
         }
         echo json_encode($response);
         break;
+    /** @noinspection PhpMissingBreakStatementInspection Flows into PUT */
     case 'POST':
         $key = $sql->insert_id;
     case 'PUT':
